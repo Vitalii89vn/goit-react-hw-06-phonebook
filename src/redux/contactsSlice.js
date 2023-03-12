@@ -1,29 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-// export const contactSlice = createSlice({
-//   name: 'contacts',
-//   initialState: {
-//     login: '',
-//     isLoggedIn: false,
-//   },
-//   reducers: {
-//     logIn(state, action) {
-//       state.login = action.payload;
-//       state.isLoggedIn = true;
-//     },
-//     logOut(state) {
-//       state.login = '';
-//       state.isLoggedIn = false;
-//     },
-//   },
-// });
-
-// export const { logIn, logOut } = userSlice.actions;
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const contactInitialState = [];
 
 const contactSlice = createSlice({
-  name: "tasks",
+  name: "contacts",
   initialState: contactInitialState,
   reducers: {
     addContact(state, action) {
@@ -36,5 +18,14 @@ const contactSlice = createSlice({
       },
 });
 
+const persistConfig = {
+  key: 'contacts',
+  storage,
+};
+
+export const contactReducer = persistReducer(persistConfig, contactSlice.reducer);
 export const { addContact, deleteContact } = contactSlice.actions;
-export const contactReducer = contactSlice.reducer;
+
+// Selectors
+export const getContacts = state => state.contacts.value;
+
