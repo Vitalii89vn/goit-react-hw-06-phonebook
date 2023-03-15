@@ -10,12 +10,11 @@ export const ContactListItem = ({ id, name, number }) => {
         <li>{name}: {number}
             <button type="button" onClick={handleDelete}>Delete</button>
         </li>
-          
     )
 };
 
-// ContactListItem.propTypes = {
-//     name: PropTypes.string.isRequired,
-//     number: PropTypes.string.isRequired,
-//     onDelete: PropTypes.func.isRequired
-// };
+ContactListItem.propTypes = {
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
+};
